@@ -1,0 +1,18 @@
+= widget_div do
+  %ul.nav
+    - @sections.each do |p|
+      %li{'data-id' => p.id, :class => "#{p == @current_section? 'current_section' : nil }"}
+        #{link_to p.name, [@community, p]}
+        - if (can? :update, @community) && p == @current_section
+          %a.setting{:href => "#"} edit
+    - if can? :update, @community
+      %li{:class => "#{@parent_controller.parent_controller.action_name == 'admin'? 'current_section' : nil }"} 
+        #{link_to '设置', admin_community_path(@community)}
+
+  :javascript
+    $(document).ready(function(){
+      $("#add_widgets").hide();
+      $('.setting').click(function() {
+        $("#add_widgets").slideToggle();
+      });
+    });

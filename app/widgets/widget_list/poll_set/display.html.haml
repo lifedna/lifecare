@@ -1,0 +1,32 @@
+/ %li{:id => dom_id(@poll_set)}
+%li{:id => "widget_#{@poll_set.id}"}
+  .handle
+    = @poll_set.name
+    - if can? :update, @poll_set.community
+      = link_to 'delete', url_for_event(:delete_widget, :id => @poll_set.section.id, :widget_id => @poll_set.id), :confirm => 'Are you sure?', :method => 'delete', :remote => true
+      = link_to '全部', community_poll_set_polls_path(@poll_set.community, @poll_set)
+      = link_to '添加', new_community_poll_set_poll_path(@poll_set.community, @poll_set)
+      %a{:href => "#", :id => "#{@poll_set.id}-settings"} settings
+
+  .widget-settings{"data-id" => "#{@poll_set.id}", :style => "width:500px; background:#f4f4ec; padding:20px; margin-bottom:10px;"}
+    = form_for @poll_set, :url => community_poll_set_url(@poll_set.community, @poll_set) do |f|
+      %p
+        = f.text_field :name
+      %p  
+        = f.submit "保存"
+
+  %div{:id => dom_id(@poll_set), :style => "min-height:100px; width:500px; background:#f4f4ec; padding:20px;"}
+    - @poll_set.polls.each do |poll|
+      %p
+        #{poll.name}
+      %ul
+        - poll.options.each do |option|
+          %li #{option.name} 
+
+:javascript
+  $(document).ready(function(){
+    $(".widget-settings[data-id=#{@poll_set.id}]").hide();
+    $('##{@poll_set.id}-settings').click(function() {
+      $(".widget-settings[data-id=#{@poll_set.id}]").slideToggle();
+    });
+  });  

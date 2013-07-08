@@ -1,0 +1,40 @@
+/ %li{:id => dom_id(@forum)}
+%li{:id => "widget_#{@forum.id}"}
+  .handle
+    = @forum.name
+    - if (can? :update, @forum.community) || (can? :participate, @forum.community)
+      = link_to '发言', new_community_forum_topic_path(@forum.community, @forum)
+    - if can? :update, @forum.community
+      = link_to 'delete', url_for_event(:delete_widget, :id => @forum.section.id, :widget_id => @forum.id), :confirm => 'Are you sure?', :method => 'delete', :remote => true
+      %a{:href => "#", :id => "#{@forum.id}-settings"} settings
+
+  .widget-settings{"data-id" => "#{@forum.id}", :style => "width:500px; background:#f4f4ec; padding:20px; margin-bottom:10px;"}
+    = form_for @forum, :url => community_forum_url(@forum.community, @forum)  do |f|
+      %p
+        = f.text_field :name
+      %p  
+        = f.submit "保存"
+
+  %div{:id => dom_id(@forum), :style => "min-height:100px; width:500px; background:#f4f4ec; padding:20px;"}
+    %table
+      %tr
+        %th 话题
+        %th 作者
+        %th 回应
+        %th 浏览
+        %th 最后更新
+      - @forum.topics.each do |t|
+        %tr 
+          %td #{link_to t.title, community_topic_url(t.community, t)}
+          %td 
+          %td #{t.posts_count}
+          %td #{t.hits}
+          %td #{t.created_at.strftime("%H:%M %Y-%m-%d ")}    
+
+:javascript
+  $(document).ready(function(){
+    $(".widget-settings[data-id=#{@forum.id}]").hide();
+    $('##{@forum.id}-settings').click(function() {
+      $(".widget-settings[data-id=#{@forum.id}]").slideToggle();
+    });
+  });         

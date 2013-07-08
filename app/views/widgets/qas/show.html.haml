@@ -1,0 +1,10 @@
+%h1 #{@community.name}
+%p #{@community.brief}
+
+%p
+  = render :partial => "shared/sections_menu", :locals => {:sections => @sections}
+
+%p
+  = link_to ">#{@current_section.name}", community_section_url(@community, @current_section)
+%p
+  #{@qa.name}

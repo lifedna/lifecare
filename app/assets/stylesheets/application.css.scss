@@ -9,6 +9,7 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
+ *= require reveal
  *= require_tree .
 */
 .brand {
@@ -34,4 +35,11 @@ ul.nav li {
 #flash_alert {
   background-color: #FCC;
   border: solid 1px #C66;
+}
+
+li.sortable-placeholder {
+  border: 1px dashed #CCC;
+  background: none;
+  height: 120px;
+  width: 500px
 }

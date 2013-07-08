@@ -1,0 +1,15 @@
+%h1 发布一个新投票
+= nested_form_for @poll, :url => {:action => "create"} do |f|
+  %p
+    = f.label "投票主题："
+    = f.text_field :name
+  %p
+    = f.hidden_field :poll_set_id, :value => @poll_set.id  
+  %p
+    = f.hidden_field :community_id, :value => @poll_set.community.id  
+  %p
+    = f.fields_for :options do |option|
+      = option.label "选项"
+      = option.text_field :name  
+  %p  
+    = f.submit "发布"

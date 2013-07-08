@@ -1,6 +1,10 @@
+# coding: utf-8
 class User
   include Mongoid::Document
   include Mongoid::Timestamps
+  include Mongoid::Commenter
+  include Streama::Actor
+  include Mongoid::Liker
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
@@ -48,5 +52,23 @@ class User
   validates_presence_of :name
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :created_at, :updated_at
 
+  has_and_belongs_to_many :communities
   has_many :blogs
+  has_many :phrs
+
+  # Callbacks
+  after_create :create_initial_phr
+
+
+  def followers
+    User.excludes(:id => self.id).all
+  end
+
+  private
+    def create_initial_phr
+      self.phrs.build(:name => self.name, :relationship => '自己').tap do |phr|
+        phr.user = self
+        phr.save
+      end
+    end
 end

@@ -1,0 +1,27 @@
+/ %li{:id => dom_id(@bulletin)}
+%li{:id => "widget_#{@bulletin.id}"}
+  .handle
+    = @bulletin.name
+    - if can? :update, @bulletin.community
+      = link_to 'delete', url_for_event(:delete_widget, :id => @bulletin.section.id, :widget_id => @bulletin.id), :confirm => 'Are you sure?', :method => 'delete', :remote => true
+      = link_to 'edit', edit_community_bulletin_path(@bulletin.community, @bulletin)
+      %a{:href => "#", :id => "#{@bulletin.id}-settings"} settings
+
+  .widget-settings{"data-id" => "#{@bulletin.id}", :style => "width:500px; background:#f4f4ec; padding:20px; margin-bottom:10px;"}
+    = form_for @bulletin, :url => community_bulletin_url(@bulletin.community, @bulletin)  do |f|
+      %p
+        = f.text_field :name
+      %p  
+        = f.submit "保存"
+
+  %div{:id => dom_id(@bulletin), :style => "min-height:100px; width:500px; background:#f4f4ec; padding:20px;"}
+    %p #{@bulletin.body}
+
+
+:javascript
+  $(document).ready(function(){
+    $(".widget-settings[data-id=#{@bulletin.id}]").hide();
+    $('##{@bulletin.id}-settings').click(function() {
+      $(".widget-settings[data-id=#{@bulletin.id}]").slideToggle();
+    });
+  }); 

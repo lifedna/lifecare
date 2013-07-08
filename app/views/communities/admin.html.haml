@@ -1,0 +1,8 @@
+%h1 #{@community.name}
+%p #{@community.brief}
+
+= render_widget :section_list, :display, :community => @community
+
+%h4 社群权限、基本资料设置  
+
+= link_to '添加房间', community_sections_path(@community), :method => :post

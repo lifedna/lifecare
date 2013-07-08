@@ -1,8 +1,18 @@
-= link_to "Lifecare", root_path, :class => 'brand'
+= link_to "Lifedna", root_path, :class => 'brand'
 %ul.nav
   - if user_signed_in?
     %li
-      = link_to 'Blogs', blogs_path
+      = link_to '动态', update_url
+    %li
+      = link_to '精选', features_url  
+    %li
+      = link_to '社群', communities_url   
+    %li
+      = link_to '我的健康', mine_url  
+  - else
+    %li
+      = link_to '社群', communities_url     
+  - if user_signed_in?
     %li
       = link_to 'Logout', destroy_user_session_path, :method=>'delete'
   - else
@@ -14,3 +24,5 @@
   - else
     %li
       = link_to 'Sign up', new_user_registration_path
+- if user_signed_in?
+  欢迎，#{current_user.name}      

@@ -1,0 +1,7 @@
+%h3 My Communities Update
+%ul
+- @activities.each do |activity|
+  %li
+    - present activity, ActivityPresenter do |activity_presenter|
+      #{activity_presenter.text } 
+

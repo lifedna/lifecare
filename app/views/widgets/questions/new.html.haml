@@ -1,0 +1,12 @@
+%h1 在#{@qa.name}中提问
+= form_for @question, :url => {:action => "create"}  do |f|
+  %p
+    = f.text_field :title
+  %p
+    = f.text_area :body, :size => "60x12"
+  %p
+    = f.hidden_field :community_id, :value => @qa.community.id
+  %p
+    = f.hidden_field :qa_id, :value => @qa.id  
+  %p  
+    = f.submit "更新"

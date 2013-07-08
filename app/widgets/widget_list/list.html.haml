@@ -1,0 +1,18 @@
+- if can? :update, @section.community
+  %ul#sortable{"data-event-url" => url_for_event(:sort, :id => params[:id]) }
+    - for widget in widgets
+      = render_widget "#{widget.class.to_s.underscore}-#{widget.id}", :display, :widget => widget
+- else
+  %ul
+    - for widget in widgets
+      = render_widget "#{widget.class.to_s.underscore}-#{widget.id}", :display, :widget => widget
+
+  / :javascript
+  /   $(document).ready(function(){
+  /     $('#sortable').sortable({
+  /       axis: 'y',
+  /       handle: '.handle',
+  /       update: function(event, ui) {
+  /         $.post($(this).data('event-url'), $(this).sortable('serialize'))  } 
+  /     });     
+  /   });
