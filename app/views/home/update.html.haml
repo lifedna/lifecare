@@ -7,4 +7,8 @@
           #{activity_presenter.metadata}
         %p
           #{activity_presenter.text } 
+        - if activity_presenter.content?
+          .content
+            #{activity.the_object.body}
+
 

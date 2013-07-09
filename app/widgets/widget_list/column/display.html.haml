@@ -16,7 +16,7 @@
 
   %div{:id => dom_id(@column), :style => "min-height:100px; width:500px; background:#f4f4ec; padding:20px;"}
     - @column.articles.each do |article|
-      %h4 #{link_to article.title, community_article_path(article.community, article)}
+      %h4 #{link_to article.title, show_community_article_path(article.community, article)}
       %small #{article.created_at.strftime("%H:%M %Y-%m-%d ")}
       %p #{article.body}
    

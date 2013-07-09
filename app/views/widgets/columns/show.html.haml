@@ -1,0 +1,14 @@
+%h1 #{@community.name}
+%p #{@community.brief}
+
+%p
+  = render :partial => "shared/sections_menu", :locals => {:sections => @sections, :current_section => @current_section}
+
+%p
+  #{link_to ">#{@current_section.name}", community_section_url(@community, @current_section)}
+
+%h3 #{@column.name}
+%div{:id => dom_id(@column), :style => "min-height:100px; width:500px; background:#f4f4ec; padding:20px;"}
+  %ul
+  - @column.articles.each do |a|
+    %li #{link_to a.title, show_community_article_url(@community, a)}

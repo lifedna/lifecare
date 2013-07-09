@@ -5,6 +5,6 @@
   = render :partial => "shared/sections_menu", :locals => {:sections => @sections, :current_section => @current_section}
 
 %p
-  #{link_to ">#{@question.qa.name}", community_qa_url(@question.community, @question.qa)}
+  #{link_to ">#{@question.qa.name}", show_community_qa_url(@question.community, @question.qa)}
 %p
   #{@question.title}

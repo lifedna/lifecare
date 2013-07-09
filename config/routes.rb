@@ -3,25 +3,25 @@ Lifecare::Application.routes.draw do
   match '/features' => 'home#features', :as => :features
   match '/mine' => 'home#mine', :as => :mine	
 
+  scope 'communities' do
+    match '/:community_id/columns/:id' => 'widgets/columns#show', :as => :show_community_column, :via => :get
+    match '/:community_id/articles/:id' => 'widgets/articles#show', :as => :show_community_article, :via => :get
+    match '/:community_id/articles/:id/comment' => 'widgets/articles#comment', :as => :comment_community_article, :via => :get  
+
+    match '/:community_id/forum/:id' => 'widgets/forums#show', :as => :show_community_forum, :via => :get
+    match '/:community_id/topics/:id' => 'widgets/topics#show', :as => :show_community_topic, :via => :get
+    match '/:community_id/topics/:id/comment' => 'widgets/topics#comment', :as => :comment_community_topic, :via => :get
+
+    match '/:community_id/qas/:id' => 'widgets/qas#show', :as => :show_community_qa, :via => :get
+    match '/:community_id/questions/:id' => 'widgets/questions#show', :as => :show_community_question, :via => :get
+
+    match '/:community_id/poll_sets/:id' => 'widgets/poll_sets#show', :as => :show_community_poll_set, :via => :get
+    match '/:community_id/polls/:id' => 'widgets/polls#show', :as => :show_community_poll, :via => :get
+    match '/:community_id/polls/:id/comment' => 'widgets/polls#comment', :as => :comment_community_poll, :via => :get
+  end    
+
   resources :blogs do 
   	get 'comment', :on => :member
-  end  
-
-  scope 'communities' do
-    match '/:community_id/columns/:id' => 'widgets/columns#show', :as => :community_column
-    match '/:community_id/articles/:id' => 'widgets/articles#show', :as => :community_article
-    match '/:community_id/articles/:id/comment' => 'widgets/articles#comment', :as => :comment_community_article  
-
-    match '/:community_id/forum/:id' => 'widgets/forums#show', :as => :community_forum
-    match '/:community_id/topics/:id' => 'widgets/topics#show', :as => :community_topic
-    match '/:community_id/topics/:id/comment' => 'widgets/topics#comment', :as => :comment_community_topic
-
-    match '/:community_id/qas/:id' => 'widgets/qas#show', :as => :community_qa
-    match '/:community_id/questions/:id' => 'widgets/questions#show', :as => :community_question
-
-    match '/:community_id/poll_sets/:id' => 'widgets/poll_sets#show', :as => :community_poll_set
-    match '/:community_id/polls/:id' => 'widgets/polls#show', :as => :community_poll
-    match '/:community_id/polls/:id/comment' => 'widgets/polls#comment', :as => :comment_community_poll
   end  
 
   resources :communities do
@@ -62,4 +62,6 @@ Lifecare::Application.routes.draw do
   root :to => "home#index"
   devise_for :users
   resources :users
+
+
 end

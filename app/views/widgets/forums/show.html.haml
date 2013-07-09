@@ -18,7 +18,7 @@
       %th 最后更新
     - @forum.topics.each do |t|
       %tr 
-        %td #{link_to t.title, community_topic_url(t.community, t)}
+        %td #{link_to t.title, show_community_topic_url(t.community, t)}
         %td 
         %td #{t.posts_count}
         %td #{t.hits}

@@ -27,7 +27,9 @@ class Widgets::ArticlesController < ApplicationController
 
   def comment
     @article = Article.find params[:id]
-    if current_user.comment_on(@article, params[:comment])
+    comment = current_user.comment_on(@article, params[:comment])
+    if comment.persisted?
+      # current_user.publish_activity(:new_comment, :object => comment, :target_object => @article.community)
       redirect_to :action => "show"
     else
       flash[:notice] = "Comment save failed!"

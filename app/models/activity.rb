@@ -25,11 +25,12 @@ class Activity
     target_object :community
   end
 
-  activity :comment do 
-    actor :user
-    object :article
-    target_object :community
-  end
+  # activity :new_comment do 
+  #   actor :user
+  #   object :"mongoid/comment"
+  #   # object :comment
+  #   target_object :community
+  # end
 
   activity :join do
     actor :user

@@ -9,7 +9,7 @@
       %a{:href => "#", :id => "#{@forum.id}-settings"} settings
 
   .widget-settings{"data-id" => "#{@forum.id}", :style => "width:500px; background:#f4f4ec; padding:20px; margin-bottom:10px;"}
-    = form_for @forum, :url => community_forum_url(@forum.community, @forum)  do |f|
+    = form_for @forum, :url => community_forum_url(@forum.community, @forum) do |f|
       %p
         = f.text_field :name
       %p  
@@ -25,7 +25,7 @@
         %th 最后更新
       - @forum.topics.each do |t|
         %tr 
-          %td #{link_to t.title, community_topic_url(t.community, t)}
+          %td #{link_to t.title, show_community_topic_url(t.community, t)}
           %td 
           %td #{t.posts_count}
           %td #{t.hits}

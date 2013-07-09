@@ -29,7 +29,7 @@
           %th 最后更新
         - @qa.questions.each do |q|
           %tr 
-            %td #{link_to q.title, community_question_url(q.community, q)}
+            %td #{link_to q.title, show_community_question_url(q.community, q)}
             %td 
             %td 
             %td 

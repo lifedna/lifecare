@@ -5,7 +5,7 @@
   = render :partial => "shared/sections_menu", :locals => {:sections => @sections, :current_section => @current_section}
 
 %p
-  #{link_to ">#{@topic.forum.name}", community_forum_url(@topic.community, @topic.forum)}
+  #{link_to ">#{@topic.forum.name}", show_community_forum_url(@topic.community, @topic.forum)}
 
 %h3 #{@topic.title}
 %small #{@topic.created_at}

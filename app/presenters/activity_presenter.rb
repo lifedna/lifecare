@@ -30,13 +30,15 @@ class ActivityPresenter < BasePresenter
   def text
   	case activity.verb
   	when :new_article
-  	  out = %(#{raw link_to(activity.the_actor.name, activity.the_actor)} 写了新文章 #{raw link_to(activity.the_object.title, [activity.the_object.community, activity.the_object])})
+  	  out = %(#{raw link_to(activity.the_actor.name, activity.the_actor)} 写了新文章 #{raw link_to(activity.the_object.title, show_community_article_path(activity.the_object.community, activity.the_object))})
   	when :new_question
-  	  out = %(#{raw link_to(activity.the_actor.name, activity.the_actor)} 发起了新问题 #{raw link_to(activity.the_object.title, [activity.the_object.community, activity.the_object])})
+  	  out = %(#{raw link_to(activity.the_actor.name, activity.the_actor)} 发起了新问题 #{raw link_to(activity.the_object.title, show_community_question_path(activity.the_object.community, activity.the_object))})
   	when :new_topic
-      out = %(#{raw link_to(activity.the_actor.name, activity.the_actor)} 写了新帖子 #{raw link_to(activity.the_object.title, [activity.the_object.community, activity.the_object])})  
+      out = %(#{raw link_to(activity.the_actor.name, activity.the_actor)} 写了新帖子 #{raw link_to(activity.the_object.title, show_community_topic_path(activity.the_object.community, activity.the_object))})  
     when :new_poll
-      out = %(#{raw link_to(activity.the_actor.name, activity.the_actor)} 发起了新投票 #{raw link_to(activity.the_object.name, [activity.the_object.community, activity.the_object])})
+      out = %(#{raw link_to(activity.the_actor.name, activity.the_actor)} 发起了新投票 #{raw link_to(activity.the_object.name, show_community_poll_path(activity.the_object.community, activity.the_object))})
+    when :new_comment
+      out = %(#{raw link_to(activity.the_actor.name, activity.the_actor)} 评论了文章 #{raw link_to(activity.the_object.article.title, [activity.the_object.article.community, activity.the_object.article])})
     when :join
       out = %(#{raw link_to(activity.the_actor.name, activity.the_actor)} 加入了社群 #{raw link_to(activity.the_object.name, activity.the_object)})   
   	else
@@ -44,4 +46,19 @@ class ActivityPresenter < BasePresenter
   	end	
   	return raw out
   end	
+
+  def content?
+    case activity.verb
+    when :new_article
+      return true
+    when :new_question
+      return true
+    when :new_topic
+      return true
+    when :comment
+      return true
+    else
+      return false
+    end  
+  end  
 end  
