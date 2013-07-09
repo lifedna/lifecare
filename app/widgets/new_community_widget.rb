@@ -11,7 +11,7 @@ class NewCommunityWidget < AuthorizableWidget
   	community.owner = current_user
     community.users << current_user
   	community.save!
-    current_user.publish_activity(:join, :object => community, :target_object => community)
+    # current_user.publish_activity(:join, :object => community, :target_object => community)
   	trigger :newCommunity, :task => community
   	replace :view => :display
   end
