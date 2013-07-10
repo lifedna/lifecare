@@ -24,12 +24,15 @@ class HomeController < ApplicationController
     if params[:category]
       @blogs = Blog.where(category: params[:category]).full_text_search(@keywords)
       @articles = Article.where(category: params[:category]).full_text_search(@keywords)
+      @topics = Topic.where(category: params[:category]).full_text_search(@keywords)
     else
       @blogs = Blog.all.full_text_search(@keywords)
       @articles = Article.all.full_text_search(@keywords)
+      @topics = Topic.all.full_text_search(@keywords)
     end  
     @items.concat(@blogs)
     @items.concat(@articles)
+    @items.concat(@topics)
   end
 
   def mine
