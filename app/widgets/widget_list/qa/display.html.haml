@@ -13,27 +13,28 @@
         = f.text_field :name
       %p  
         = f.submit "保存"
-  - if (can? :update, @qa.community) || (can? :participate, @qa.community)         
-    %div{:id => dom_id(@qa), :style => "min-height:100px; width:500px; background:#f4f4ec; padding:20px;"}
+
+  %div{:id => dom_id(@qa), :style => "min-height:100px; width:500px; background:#f4f4ec; padding:20px;"}
+    - if (can? :update, @qa.community) || (can? :participate, @qa.community) 
       = form_tag new_community_qa_question_path(@qa.community, @qa), :method => :get do
         = text_field_tag :title
         %p  
           = submit_tag "提个问"    
-  %br
-  %table
-    %tr
-      %th 问题
-      %th 作者
-      %th 回应
-      %th 浏览
-      %th 最后更新
-    - @qa.questions.each do |q|
-      %tr 
-        %td #{link_to q.title, show_community_question_url(q.community, q)}
-        %td 
-        %td 
-        %td 
-        %td #{q.created_at.strftime("%H:%M %Y-%m-%d ")}       
+    %br
+    %table
+      %tr
+        %th 问题
+        %th 作者
+        %th 回应
+        %th 浏览
+        %th 最后更新
+      - @qa.questions.each do |q|
+        %tr 
+          %td #{link_to q.title, show_community_question_url(q.community, q)}
+          %td 
+          %td 
+          %td 
+          %td #{q.created_at.strftime("%H:%M %Y-%m-%d ")}       
 
 :javascript
   $(document).ready(function(){
