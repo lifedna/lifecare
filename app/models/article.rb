@@ -5,7 +5,7 @@ class Article
   include Mongoid::Commentable
   include Mongoid::TaggableWithContext
   include Mongoid::TaggableWithContext::AggregationStrategy::MapReduce
-
+  include Mongoid::Search
   include Mongoid::Likeable
 
   taggable
@@ -16,6 +16,8 @@ class Article
   field :sticky, type: Boolean, :default => false
   field :locked, type: Boolean, :default => false
   field :category, type: String
+
+  search_in :title, :body
 
   validates :title, :body, :presence => true
   validates :category, :inclusion => {:in => %w(健康知识 就医指南 治疗交流 护理园地 用药常识), :message => "%{value} is not a valid category" }, :allow_nil => true

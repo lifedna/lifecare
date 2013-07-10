@@ -5,9 +5,9 @@ class Blog
   include Mongoid::Commentable
   include Mongoid::TaggableWithContext
   include Mongoid::TaggableWithContext::AggregationStrategy::MapReduce
-
   include Mongoid::Likeable
-
+  include Mongoid::Search
+  
   taggable
 
   field :title, type: String
@@ -16,6 +16,9 @@ class Blog
   field :locked, type: Boolean, :default => false
   field :public, type: Boolean, :default => true
   field :category, type: String
+
+  search_in :title, :body
+
 
   validates :title, :body, :presence => true
   validates :category, :inclusion => {:in => %w(健康知识 就医指南 治疗交流 护理园地 用药常识), :message => "%{value} is not a valid category" }, :allow_nil => true

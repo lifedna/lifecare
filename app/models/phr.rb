@@ -21,5 +21,52 @@ class Phr
   validates :relationship, :inclusion => {:in => %w(父亲 母亲 配偶 儿子 女儿 亲戚 朋友 自己), :message => "%{value} is not a valid relationship" }, :allow_nil => true	
 
   belongs_to :user
+  has_one :feature_filter
 
+  class << self
+    def conditions_keywords 
+      Phr.distinct('conditions.name')
+      # Phr.distinct('conditions.name').join(' ')
+    end
+
+    def symptoms_keywords
+      Phr.distinct('symptoms.name')
+      # Phr.distinct('symptoms.name').join(' ')
+    end
+
+    def treatments_keywords
+      Phr.distinct('treatments.name')
+      # Phr.distinct('treatments.name').join(' ')
+    end  
+  end 
+
+  def conditions_keywords
+    Phr.where(id: self.id).distinct('conditions.name')
+    # Phr.where(id: self.id).distinct('conditions.name').join(' ')
+  end
+
+  def symptoms_keywords
+    Phr.where(id: self.id).distinct('symptoms.name')
+    # Phr.where(id: self.id).distinct('symptoms.name').join(' ')
+  end
+  
+  def treatments_keywords
+    Phr.where(id: self.id).distinct('treatments.name')
+    # Phr.where(id: self.id).distinct('treatments.name').join(' ')
+  end
+
+   
+
+  # Callbacks
+  after_create :create_features_filter
+
+  def create_features_filter
+    self.build_feature_filter.tap do |filter|
+      filter.conditions = Hash.new
+      filter.symptoms = Hash.new
+      filter.treatments = Hash.new
+      filter.phr = self
+      filter.save
+    end
+  end
 end

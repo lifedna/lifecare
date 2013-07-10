@@ -21,6 +21,7 @@ gem 'apotomo', '~> 1.2.3'
 gem 'simple_form'
 gem 'nested_form'
 gem 'cancan'
+gem 'mongoid_search'
 
 group :development do
   gem 'better_errors'

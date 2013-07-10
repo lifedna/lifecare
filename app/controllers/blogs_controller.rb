@@ -1,5 +1,6 @@
 class BlogsController < ApplicationController
   before_filter :authenticate_user!, :except => [:show]
+  # impressionist :actions=>[:show]
 
   def new
     @blog = Blog.new

@@ -3,6 +3,7 @@ class Topic
   include Mongoid::Timestamps
   include Mongoid::Likeable
   include Mongoid::Commentable
+  include Mongoid::Search
 
   field :title, type: String
   field :body, type: String
@@ -12,9 +13,9 @@ class Topic
   field :posts_count, type: Integer, :default => 0
   field :category, type: Integer
 
-  validates_presence_of :title, :body
+  search_in :title, :body
 
-  # attr_accessible :title, :body, :forum_id, :community_id
+  validates_presence_of :title, :body
 
   belongs_to :forum
   belongs_to :user

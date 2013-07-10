@@ -2,6 +2,7 @@ class Question
   include Mongoid::Document	
   include Mongoid::Timestamps
   include Mongoid::Likeable
+  include Mongoid::Search
 
   field :title, type: String
   field :body, type: String
@@ -11,7 +12,7 @@ class Question
   field :closed, type: Boolean, default: false
   field :closed_at, type: Time
   
-  # attr_accessible :title, :body, :qa_id, :community_id
+  search_in :title, :body
 
   has_many :answers
   belongs_to :user
