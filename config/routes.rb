@@ -1,4 +1,6 @@
 Lifecare::Application.routes.draw do
+  get "feature_filter/update"
+
   match '/update' => 'home#update', :as => :update
   match '/features' => 'home#features', :as => :features
   match '/mine' => 'home#mine', :as => :mine	
@@ -63,5 +65,5 @@ Lifecare::Application.routes.draw do
   devise_for :users
   resources :users
 
-
+  resource :feature_filter
 end

@@ -18,13 +18,15 @@ class HomeController < ApplicationController
   end
   
   def features
+    @feature_filter = current_user.feature_filter
+    @keywords = current_user.feature_filter.merged_keywords
     @items ||= []
     if params[:category]
-      @blogs = Blog.where(category: params[:category])
-      @articles = Article.where(category: params[:category])
+      @blogs = Blog.where(category: params[:category]).full_text_search(@keywords)
+      @articles = Article.where(category: params[:category]).full_text_search(@keywords)
     else
-      @blogs = Blog.all
-      @articles = Article.all
+      @blogs = Blog.all.full_text_search(@keywords)
+      @articles = Article.all.full_text_search(@keywords)
     end  
     @items.concat(@blogs)
     @items.concat(@articles)

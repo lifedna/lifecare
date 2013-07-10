@@ -1,22 +1,49 @@
 %h3 Features
 %ul.nav
-  %li 
+  %li{:class => "#{params[:category].nil?? 'current' : nil }"} 
     = link_to '所有', features_path
-  %li 
+  %li{:class => "#{params[:category] == '健康知识'? 'current' : nil }"} 
     = link_to '健康知识', features_path(:category => '健康知识')
-  %li 
+  %li{:class => "#{params[:category] == '就医指南'? 'current' : nil }"} 
     = link_to '就医指南', features_path(:category => '就医指南')
-  %li 
+  %li{:class => "#{params[:category] == '治疗交流'? 'current' : nil }"}  
     = link_to '治疗交流', features_path(:category => '治疗交流')
-  %li 
+  %li{:class => "#{params[:category] == '护理园地'? 'current' : nil }"} 
     = link_to '护理园地', features_path(:category => '护理园地') 
-  %li 
+  %li{:class => "#{params[:category] == '用药常识'? 'current' : nil }"}  
     = link_to '用药常识', features_path(:category => '用药常识')          
+
+%h4 
+  精选内容
+  %small 
+    %a.link-setting{:href => "#"} 设置
+.features-setting
+  = form_for @feature_filter, :url => feature_filter_url do |f|
+    %p 显示与您和家人健康相关的内容
+    %p 
+      %small 相关疾病
+    - @feature_filter.conditions.each do |k, v|
+      = f.fields_for :conditions do |c|
+        = c.check_box k, checked: (v == "1" ? "checked" : "")
+        %small
+          = c.label k
+    %p 
+      %small 相关病症
+    - @feature_filter.symptoms.each do |k, v|
+      = f.fields_for :symptoms do |c|
+        = c.check_box k, checked: (v == "1" ? "checked" : "") 
+        %small
+          = c.label k     
+    %p    
+      = f.submit '保存'
 
 %ul
 - @items.each do |item|
   %li
-    #{item.title}
+    - if item.class.to_s.underscore == 'blog'
+      = link_to item.title, blog_url(item)
+    - else
+      = link_to item.title, self.send("show_community_#{item.class.to_s.underscore}_url", item.community, item)
     %br
     %small #{time_ago_in_words(item.created_at).capitalize}前 #{item.category}
     %br
@@ -25,3 +52,11 @@
         %a{:href => "#"} 取消收藏
       - else  
         %a{:href => "#"} 收藏
+
+:javascript
+  $(document).ready(function(){
+    $('.features-setting').hide();
+      $('.link-setting').click(function() {
+        $('.features-setting').slideToggle();
+    });
+  });        

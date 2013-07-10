@@ -55,9 +55,23 @@ class User
   has_and_belongs_to_many :communities
   has_many :blogs
   has_many :phrs
+  has_one :feature_filter
 
   # Callbacks
-  after_create :create_initial_phr
+  after_create :create_initial_phr, :create_initial_filter
+
+  # features filter
+  def conditions_keywords
+    self.phrs.distinct('conditions.name')
+  end
+
+  def symptoms_keywords
+    self.phrs.distinct('symptoms.name')
+  end
+  
+  def treatments_keywords
+    self.phrs.distinct('treatments.name')
+  end
 
 
   def followers
@@ -71,4 +85,14 @@ class User
         phr.save
       end
     end
+
+  def create_initial_filter
+    self.build_feature_filter.tap do |i|
+      i.conditions = Hash.new
+      i.symptoms = Hash.new
+      i.treatments = Hash.new
+      i.user = self
+      i.save
+    end
+  end    
 end

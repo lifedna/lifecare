@@ -21,7 +21,7 @@ class Phr
   validates :relationship, :inclusion => {:in => %w(父亲 母亲 配偶 儿子 女儿 亲戚 朋友 自己), :message => "%{value} is not a valid relationship" }, :allow_nil => true	
 
   belongs_to :user
-  has_one :feature_filter
+  # has_one :feature_filter
 
   class << self
     def conditions_keywords 
@@ -58,15 +58,13 @@ class Phr
    
 
   # Callbacks
-  after_create :create_features_filter
+  # after_create :create_initialize_filter
 
-  def create_features_filter
-    self.build_feature_filter.tap do |filter|
-      filter.conditions = Hash.new
-      filter.symptoms = Hash.new
-      filter.treatments = Hash.new
-      filter.phr = self
-      filter.save
-    end
-  end
+  # def create_initialize_filter
+  #   self.build_feature_filter.tap do |i|
+  #     i.filters = Hash.new
+  #     i.phr = self
+  #     i.save
+  #   end
+  # end
 end
