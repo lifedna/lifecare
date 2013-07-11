@@ -10,18 +10,18 @@ class PhrsController < ApplicationController
     end
   end
 
-  def conditions
-    @phr = Phr.find params[:id]
-    @conditions = @phr.conditions
-  end
+  # def conditions
+  #   @phr = Phr.find params[:id]
+  #   @conditions = @phr.conditions
+  # end
 
-  def symptoms
-    @phr = Phr.find params[:id]
-  end
+  # def symptoms
+  #   @phr = Phr.find params[:id]
+  # end
 
-  def treatments
-    @phr = Phr.find params[:id]
-  end
+  # def treatments
+  #   @phr = Phr.find params[:id]
+  # end
 
 
   def update

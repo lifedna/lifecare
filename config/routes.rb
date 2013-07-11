@@ -56,6 +56,10 @@ Lifecare::Application.routes.draw do
       resources :symptoms
       resources :treatments
     end
+
+    # get 'conditions', :on => :member
+    # get 'symptoms', :on => :member
+    # get 'treatments', :on => :member
   end
 
   authenticated :user do

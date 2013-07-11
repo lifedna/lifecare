@@ -1,4 +1,8 @@
 class Phrs::ConditionsController < ApplicationController
+  has_widgets do |root|
+    root << widget('phr/condition', :condition)
+  end
+
   def index
     @phr = Phr.find params[:phr_id]
     @conditions = @phr.conditions
