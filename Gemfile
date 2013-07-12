@@ -23,6 +23,7 @@ gem 'nested_form'
 gem 'cancan'
 gem 'mongoid_search'
 # gem 'streamio-ffmpeg'
+gem 'nokogiri'
 gem 'getvideo', :git => 'git://github.com/yeeli/getvideo.git'
 
 group :development do

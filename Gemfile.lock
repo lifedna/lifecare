@@ -267,6 +267,7 @@ DEPENDENCIES
   mongoid_socializer_actions
   mongoid_taggable_with_context
   nested_form
+  nokogiri
   quiet_assets
   rails (= 3.2.13)
   rspec-rails
