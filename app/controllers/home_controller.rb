@@ -44,8 +44,5 @@ class HomeController < ApplicationController
     @condition = @phr.conditions.build
     @symptom = @phr.symptoms.build
     @treatment = @phr.treatments.build
-
-    video_info = Video.create(:url => 'http://v.youku.com/v_show/id_XMzQ4MDgzMTA0.html').info
-    @img_url = video_info.cover
   end	
 end

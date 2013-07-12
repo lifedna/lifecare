@@ -10,9 +10,9 @@ class Video
   validates :title, :url, :presence => true
   validates :url, :uniqueness => true
 
-  def info
-  	Getvideo.parse(self.url)
-  end 	
+  # def info
+  # 	Getvideo.parse(self.url)
+  # end 	
 
   belongs_to :community
   belongs_to :video_list
