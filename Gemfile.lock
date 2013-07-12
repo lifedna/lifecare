@@ -1,3 +1,9 @@
+GIT
+  remote: git://github.com/yeeli/getvideo.git
+  revision: b7f300e5cf06a691117b85d95f9413b4c7fbbbe9
+  specs:
+    getvideo (0.0.3)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -249,6 +255,7 @@ DEPENDENCIES
   email_spec
   factory_girl_rails
   figaro
+  getvideo!
   haml-rails
   html2haml
   jquery-rails
