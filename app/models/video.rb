@@ -1,7 +1,7 @@
 class Video
   include Mongoid::Document	
   include Mongoid::Timestamps
-  include Getvideo
+  # include Getvideo
 
   field :title, type: String
   field :url, type: String
