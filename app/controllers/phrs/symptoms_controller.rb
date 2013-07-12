@@ -1,4 +1,8 @@
 class Phrs::SymptomsController < ApplicationController
+  has_widgets do |root|
+    root << widget('phr/symptom', :symptom)
+  end
+
   def index
     @phr = Phr.find params[:phr_id]
     @symptoms = @phr.symptoms

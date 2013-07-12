@@ -8,7 +8,7 @@
 
   %h4 相关内容
   %ul
-  - @condition.items.each do |item|
+  - @condition.relevant_items.each do |item|
     %li
       - if item.class.to_s.underscore == 'blog'
         = link_to item.title, blog_url(item)

@@ -24,3 +24,7 @@
       %h4 专栏
       %p 发表专栏内容的地方
       = link_to '添加', url_for_event(:new_widget, :category => "Column", :id => @section.id), :remote => true   
+    .widget
+      %h4 视频
+      %p 把别处的视频网址贴过来就能播放
+      = link_to '添加', url_for_event(:new_widget, :category => "Video_List", :id => @section.id), :remote => true    

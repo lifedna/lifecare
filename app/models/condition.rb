@@ -8,7 +8,7 @@ class Condition
 
   embedded_in :phr
 
-  def items
+  def relevant_items
   	items ||= []
 
   	blogs = Blog.all.full_text_search(self.name)

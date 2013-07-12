@@ -1,4 +1,16 @@
 Lifecare::Application.routes.draw do
+  get "videos/index"
+
+  get "videos/new"
+
+  get "videos/create"
+
+  get "videos/show"
+
+  get "videos/edit"
+
+  get "videos/update"
+
   get "feature_filter/update"
 
   match '/update' => 'home#update', :as => :update
@@ -42,6 +54,10 @@ Lifecare::Application.routes.draw do
       end  
       resources :columns, :only => :update do
         resources :articles, except: :show
+      end
+
+      resources :video_lists, :only => :update do
+        resources :videos, except: :show
       end
     end
 
