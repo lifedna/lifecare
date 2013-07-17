@@ -1,21 +1,13 @@
 Lifecare::Application.routes.draw do
-  get "videos/index"
-
-  get "videos/new"
-
-  get "videos/create"
-
-  get "videos/show"
-
-  get "videos/edit"
-
-  get "videos/update"
-
-  get "feature_filter/update"
-
   match '/update' => 'home#update', :as => :update
   match '/features' => 'home#features', :as => :features
   match '/mine' => 'home#mine', :as => :mine	
+
+  # different uploaded versions
+  match '/uploads/grid/user/avatar/:id/:filename' => 'gridfs#thumb_avatar', constraints: { filename: /thumb.*/ }
+  # route configuration for the uploaded image
+  match '/uploads/grid/user/avatar/:id/:filename' => 'gridfs#avatar'
+  
 
   scope 'communities' do
     match '/:community_id/columns/:id' => 'widgets/columns#show', :as => :show_community_column, :via => :get
@@ -83,7 +75,9 @@ Lifecare::Application.routes.draw do
   end
   root :to => "home#index"
   devise_for :users
-  resources :users
+  resources :users do
+    get :avatar, on: :member
+  end
 
   resource :feature_filter
 end

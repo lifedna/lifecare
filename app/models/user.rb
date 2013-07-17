@@ -33,6 +33,10 @@ class User
   field :current_sign_in_ip, :type => String
   field :last_sign_in_ip,    :type => String
 
+  ## carrierwave
+  field :avatar, type: String
+
+  mount_uploader :avatar, AvatarUploader
   ## Confirmable
   # field :confirmation_token,   :type => String
   # field :confirmed_at,         :type => Time
@@ -50,7 +54,7 @@ class User
   index({ email: 1 }, { unique: true, background: true })
   field :name, :type => String
   validates_presence_of :name
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :created_at, :updated_at
+  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :created_at, :updated_at, :avatar
 
   has_and_belongs_to_many :communities
   has_many :blogs

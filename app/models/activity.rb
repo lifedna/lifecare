@@ -27,7 +27,7 @@ class Activity
 
   # activity :new_comment do 
   #   actor :user
-  #   object :"mongoid/comment"
+  #   object :'mongoid/comment'
   #   # object :comment
   #   target_object :community
   # end

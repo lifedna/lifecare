@@ -25,6 +25,11 @@ gem 'mongoid_search'
 # gem 'streamio-ffmpeg'
 gem 'nokogiri'
 gem 'getvideo', :git => 'git://github.com/yeeli/getvideo.git'
+# gem 'impressionist'
+# gem 'tkh_inline_editor'
+gem 'rmagick' 
+gem 'carrierwave'
+gem 'carrierwave-mongoid', :require => "carrierwave/mongoid"
 
 group :development do
   gem 'better_errors'

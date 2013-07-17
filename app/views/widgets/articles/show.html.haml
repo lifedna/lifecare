@@ -17,7 +17,7 @@
   - @article.comments.each do |c|
     - if c.persisted?
       %li
-        #{c.body}  
+        #{simple_format c.body}  
 
 - if user_signed_in?        
   %p

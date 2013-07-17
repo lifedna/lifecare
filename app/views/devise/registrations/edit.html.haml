@@ -24,6 +24,12 @@
     %i (we need your current password to confirm your changes)
     %br/
     = f.password_field :current_password
+  %div
+    = f.label :avatar
+    %br/
+    = f.file_field :avatar  
+    %br/
+    = image_tag resource.avatar_url(:thumb)
   %div= f.submit "Update"
 %h3 Cancel my account
 %p

@@ -4,3 +4,8 @@
     = f.text_area :body, :size => "60x12"
   %p  
     = f.submit "更新"	
+
+:javascript
+  $(document).ready(function(){
+    $('#bulletin_body').wysihtml5();
+  });      
