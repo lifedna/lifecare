@@ -36,7 +36,6 @@ class User
   ## carrierwave
   field :avatar, type: String
 
-  mount_uploader :avatar, AvatarUploader
   ## Confirmable
   # field :confirmation_token,   :type => String
   # field :confirmed_at,         :type => Time
@@ -54,12 +53,14 @@ class User
   index({ email: 1 }, { unique: true, background: true })
   field :name, :type => String
   validates_presence_of :name
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :created_at, :updated_at, :avatar
+  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :created_at, :updated_at, :avatar, :remote_avatar_url 
 
   has_and_belongs_to_many :communities
   has_many :blogs
   has_many :phrs
   has_one :feature_filter
+
+  mount_uploader :avatar, AvatarUploader
 
   # Callbacks
   after_create :create_initial_phr, :create_initial_filter
