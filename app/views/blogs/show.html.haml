@@ -1,7 +1,7 @@
 %h3 #{@blog.title}
 %small 
   #{time_ago_in_words(@blog.created_at).capitalize}前 #{@blog.category}
-%p #{@blog.body}
+%p #{@blog.body.html_safe}
 %p #{@blog.tags}
 %hr
 %ul

@@ -15,4 +15,5 @@
 //= require jquery.ui.sortable
 //= require jquery_nested_form
 //= require reveal
+//= require redactor-rails
 //= require_tree .

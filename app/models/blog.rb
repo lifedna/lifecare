@@ -7,6 +7,8 @@ class Blog
   include Mongoid::TaggableWithContext::AggregationStrategy::MapReduce
   include Mongoid::Likeable
   include Mongoid::Search
+
+  include ActionView::Helpers::SanitizeHelper
   
   taggable
 
@@ -17,7 +19,7 @@ class Blog
   field :public, type: Boolean, :default => true
   field :category, type: String
 
-  search_in :title, :body
+  search_in :title, :body 
 
 
   validates :title, :body, :presence => true

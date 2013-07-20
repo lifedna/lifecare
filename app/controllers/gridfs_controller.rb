@@ -18,4 +18,23 @@ class GridfsController < ApplicationController
       expires_in 0, public: true
     end
   end
+
+  def redactor_pitcure
+    @pic = RedactorRails::Picture.find(params[:id])
+    content = @pic.data.read
+    if stale?(etag: content, last_modified: @pic.updated_at.utc, public: true)
+      send_data content, type: @pic.data.file.content_type, disposition: "inline"
+      expires_in 0, public: true
+    end
+  end
+
+  def thumb_redactor_picture
+    @pic = RedactorRails::Picture.find(params[:id])
+    content = @pic.data.thumb.read
+    if stale?(etag: content, last_modified: @pic.updated_at.utc, public: true)
+      send_data content, type: @pic.data.file.content_type, disposition: "inline"
+      expires_in 0, public: true
+    end
+  end
+
 end

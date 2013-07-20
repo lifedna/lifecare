@@ -1,4 +1,6 @@
 Lifecare::Application.routes.draw do
+  mount RedactorRails::Engine => '/redactor_rails'
+
   match '/update' => 'home#update', :as => :update
   match '/features' => 'home#features', :as => :features
   match '/mine' => 'home#mine', :as => :mine	
@@ -7,6 +9,11 @@ Lifecare::Application.routes.draw do
   match '/uploads/grid/user/avatar/:id/:filename' => 'gridfs#thumb_avatar', constraints: { filename: /thumb.*/ }
   # route configuration for the uploaded image
   match '/uploads/grid/user/avatar/:id/:filename' => 'gridfs#avatar'
+
+  # different uploaded versions
+  match '/uploads/grid/redactor_rails/picture/data/:id/:filename' => 'gridfs#thumb_redactor_pitcure', constraints: { filename: /thumb.*/ }
+  # route configuration for the uploaded image
+  match '/uploads/grid/redactor_rails/picture/data/:id/:filename' => 'gridfs#redactor_pitcure'
   
 
   scope 'communities' do

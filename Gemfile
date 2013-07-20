@@ -27,9 +27,13 @@ gem 'nokogiri'
 gem 'getvideo', :git => 'git://github.com/yeeli/getvideo.git'
 # gem 'impressionist'
 # gem 'tkh_inline_editor'
+# gem 'bootstrap-wysihtml5-rails'
 gem 'rmagick' 
 gem 'carrierwave'
 gem 'carrierwave-mongoid', :require => "carrierwave/mongoid"
+gem 'mini_magick'
+
+gem 'redactor-rails'
 
 group :development do
   gem 'better_errors'

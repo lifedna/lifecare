@@ -9,8 +9,8 @@
     = f.text_field :title
   %p
     = f.label '正文:'  
-  %p
-    = f.text_area :body, :size => "60x12"
+  %p{:style => "width:50%;"}
+    = f.text_area :body, :size => "60x100", :class => "redactor"
   %p
     = f.label '主题:'  
     = f.hint '主题之间以空格分隔'
