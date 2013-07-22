@@ -48,10 +48,10 @@
     %small #{time_ago_in_words(item.created_at).capitalize}前 #{item.category}
     %br
     %small
-      - if item.liked?(current_user)
-        %a{:href => "#"} 取消收藏
-      - else  
-        %a{:href => "#"} 收藏
+      / - if item.liked?(current_user)
+      /   %a{:href => "#"} 取消收藏
+      / - else  
+      /   %a{:href => "#"} 收藏
 
 :javascript
   $(document).ready(function(){
