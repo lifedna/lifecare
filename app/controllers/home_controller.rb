@@ -1,13 +1,18 @@
 class HomeController < ApplicationController
   before_filter :authenticate_user!, :except => [:index, :communities]
 
+  has_widgets do |root|    
+    root << widget(:update_list) 
+  end
+
   def index
     @users = User.all
   end
 
   def update
-    communities = current_user.communities
-    @activities = Activity.all_update(communities).page params[:page]
+    # communities = current_user.communities
+    # @activities = Activity.all_update(communities).page params[:page]
+    
     # if user_signed_in?
     #   @activities ||= []
     #   current_user.communities.each do |community|

@@ -1,5 +1,7 @@
 # coding: utf-8
 class ActivityPresenter < BasePresenter
+  include ActionView::Helpers
+
   presents :activity
 
   def metadata(*args)

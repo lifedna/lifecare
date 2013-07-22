@@ -1,15 +1,16 @@
 %h3 My Communities Update
-- @activities.each do |activity|
-  .activity-feed
-    - present activity, ActivityPresenter do |activity_presenter|
-      .metadata
-        %p
-          #{activity_presenter.metadata}
-        %p
-          #{activity_presenter.text } 
-        - if activity_presenter.content?
-          .content
-            #{activity.the_object.body}
+= render_widget :update_list
+/ - @activities.each do |activity|
+/   .activity-feed
+/     - present activity, ActivityPresenter do |activity_presenter|
+/       .metadata
+/         %p
+/           #{activity_presenter.metadata}
+/         %p
+/           #{activity_presenter.text } 
+/         - if activity_presenter.content?
+/           .content
+/             #{activity.the_object.body}
 
-= paginate @activities
+/ = paginate @activities, :remote => true
 
