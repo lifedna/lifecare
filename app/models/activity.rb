@@ -1,6 +1,8 @@
 class Activity
   include Streama::Activity
 
+  paginates_per 5
+
   activity :new_article do 
     actor :user
     object :article
@@ -54,5 +56,14 @@ class Activity
 
   def the_target
     target_object["type"].to_s.constantize.find_by(id: target_object["id"])
+  end
+
+  def self.all_update(communities)
+    hash_array = []
+    communities.each do |c|
+      hash = {"id"=>c.id, "type"=>"Community"}    
+      hash_array.push(hash)
+    end
+    Activity.in(target_object: hash_array).desc(:created_at)
   end
 end

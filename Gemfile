@@ -32,8 +32,8 @@ gem 'rmagick'
 gem 'carrierwave'
 gem 'carrierwave-mongoid', :require => "carrierwave/mongoid"
 gem 'mini_magick'
-
 gem 'redactor-rails'
+gem 'kaminari'
 
 group :development do
   gem 'better_errors'

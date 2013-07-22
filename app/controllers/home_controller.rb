@@ -6,15 +6,17 @@ class HomeController < ApplicationController
   end
 
   def update
-    if user_signed_in?
-      @activities ||= []
-      current_user.communities.each do |community|
-        # @activities.concat(community.activities_since_jion(current_user))
-        @activities.concat(community.activities)
+    communities = current_user.communities
+    @activities = Activity.all_update(communities).page params[:page]
+    # if user_signed_in?
+    #   @activities ||= []
+    #   current_user.communities.each do |community|
+    #     # @activities.concat(community.activities_since_jion(current_user))
+    #     @activities.concat(community.activities)
 
-      end 
-      @activities.sort_by!{|i| i.created_at}.reverse! unless @activities.empty?
-    end
+    #   end 
+    #   @activities.sort_by!{|i| i.created_at}.reverse! unless @activities.empty?
+    # end
   end
   
   def features
